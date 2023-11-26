@@ -1,38 +1,81 @@
 @extends('authPages.authLayouts')
 @section('content')
-<div class="login-box">
-  <!-- /.login-logo -->
-  <div class="card card-outline card-primary">
-    <div class="card-header text-center">
-      <h2><b>PinPilJur</b></h2>
-    </div>
-    <div class="card-body">
-      <p class="login-box-msg">Silahkan Login</p>
+<body>
 
-      <form action="#" method="post">
-        <div class="input-group mb-3">
-          <input type="text" class="form-control" placeholder="Username" name="username" autofocus autocomplete="off">
-          <div class="input-group-append">
-            <div class="input-group-text">
-              <span class="fas fa-user"></span>
+  <!-- ===============================================-->
+  <!--    Main Content-->
+  <!-- ===============================================-->
+  <main class="main" id="top">
+    <div class="container-fluid">
+      <div class="row min-vh-100 flex-center g-0">
+        <div class="col-lg-8 col-xxl-5 py-3 position-relative"><img class="bg-auth-circle-shape"
+            src="adminTemplate/assets/img/icons/spot-illustrations/bg-shape.png" alt="" width="250"><img
+            class="bg-auth-circle-shape-2" src="adminTemplate/assets/img/icons/spot-illustrations/shape-1.png" alt=""
+            width="150">
+          <div class="card overflow-hidden z-index-1">
+            <div class="card-body p-0">
+              <div class="row g-0 h-100">
+                <div class="col-md-5 text-center bg-card-gradient">
+                  <div class="position-relative p-4 pt-md-5 pb-md-7 light">
+                    <div class="bg-holder bg-auth-card-shape"
+                      style="background-image:url(adminTemplate/assets/img/icons/spot-illustrations/half-circle.png);">
+                    </div>
+                    <!--/.bg-holder-->
+
+                    <div class="z-index-1 position-relative"><a
+                        class="link-light mb-4 font-sans-serif fs-4 d-inline-block fw-bolder"
+                        href="/login">{{$appName}}</a>
+                      <p class="opacity-75 text-white">{{$desk}}</p>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-7 d-flex flex-center">
+                  <div class="p-4 p-md-5 flex-grow-1">
+                    <div class="row flex-between-center">
+                      <div class="col-auto">
+                        <h3>Login Akun</h3>
+                      </div>
+                    </div>
+                    <form>
+                      <div class="mb-3">
+                        <label class="form-label" for="username">Username</label>
+                        <input class="form-control" id="username" type="text" name="username" autocomplete="off" autofocus/>
+                      </div>
+                      <div class="mb-3">
+                        <div class="d-flex justify-content-between">
+                          <label class="form-label" for="card-password">Password</label>
+                        </div>
+                        <input class="form-control" id="card-password" type="password" name="password" />
+                      </div>
+                      <div class="mb-3">
+                        <button class="btn btn-primary d-block w-100 mt-3" type="submit" name="submit">Log in</button>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
-        <div class="input-group mb-3">
-          <input type="password" class="form-control" placeholder="Password">
-          <div class="input-group-append">
-            <div class="input-group-text">
-              <span class="fas fa-lock"></span>
-            </div>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col">
-            <button type="submit" class="btn btn-primary btn-block">Masuk</button>
-          </div>
-        </div>
-      </form>
+      </div>
     </div>
-  </div>
-</div>    
+  </main>
+  <!-- ===============================================-->
+  <!--    End of Main Content-->
+  <!-- ===============================================-->
+
+  <!-- ===============================================-->
+  <!--    JavaScripts-->
+  <!-- ===============================================-->
+  <script src="adminTemplate/vendors/popper/popper.min.js"></script>
+  <script src="adminTemplate/vendors/bootstrap/bootstrap.min.js"></script>
+  <script src="adminTemplate/vendors/anchorjs/anchor.min.js"></script>
+  <script src="adminTemplate/vendors/is/is.min.js"></script>
+  <script src="adminTemplate/vendors/fontawesome/all.min.js"></script>
+  <script src="adminTemplate/vendors/lodash/lodash.min.js"></script>
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=window.scroll"></script>
+  <script src="adminTemplate/vendors/list.js/list.min.js"></script>
+  <script src="adminTemplate/assets/js/theme.js"></script>
+
+</body>
 @endsection

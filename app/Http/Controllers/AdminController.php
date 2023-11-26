@@ -8,7 +8,7 @@ class AdminController extends Controller
 {
     public function index() {
         $data = [
-            'appName' => 'PinPinJur',
+            'appName' => 'PinPilJur',
             'title' => 'Dashboard Admin'
         ];
         return view('adminPages.playPages.index', $data);
