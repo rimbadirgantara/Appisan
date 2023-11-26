@@ -20,6 +20,12 @@ Route::get('/', [HomeController::class, 'index'])->name('frontPage.index');
 
 // login
 Route::get('/login', [LoginController::class, 'index'])->name('login');
+Route::post('/login', [LoginController::class, 'doLogin']);
 
 // admin
-Route::get('/admin', [AdminController::class, 'index'])->name('admin.index');
+Route::group(['middleware' => ['auth', 'checkLevel:admin']], function() {
+  Route::get('/admin', [AdminController::class, 'index'])->name('admin.index');
+});
+
+// logout
+Route::get('/logout', [LoginController::class, 'logout'])->name('logout');

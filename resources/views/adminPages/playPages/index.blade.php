@@ -297,7 +297,7 @@
               <div class="dropdown-menu dropdown-menu-end py-0" aria-labelledby="navbarDropdownUser">
                 <div class="bg-white dark__bg-1000 rounded-2 py-2">
                   <a class="dropdown-item" href="adminTemplate/pages/user/settings.html">Settings</a>
-                  <a class="dropdown-item" href="/logout">Logout</a>
+                  <a class="dropdown-item" href="{{route('logout')}}">Logout</a>
                 </div>
               </div>
             </li>

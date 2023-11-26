@@ -36,16 +36,28 @@
                         <h3>Login Akun</h3>
                       </div>
                     </div>
-                    <form>
+                    <form method="post" action="/login" novalidate="">
                       <div class="mb-3">
+                        @csrf
+                        
                         <label class="form-label" for="username">Username</label>
-                        <input class="form-control" id="username" type="text" name="username" autocomplete="off" autofocus/>
+                        <input class="form-control @error('username') is-invalid @enderror" name="username" id="username" type="text" autocomplete="off" autofocus value="{{old('username')}}"/>
+                        @error('username')
+                        <div class="invalid-feedback">
+                          {{$message}}
+                        </div>
+                        @enderror
                       </div>
                       <div class="mb-3">
                         <div class="d-flex justify-content-between">
                           <label class="form-label" for="card-password">Password</label>
                         </div>
-                        <input class="form-control" id="card-password" type="password" name="password" />
+                        <input class="form-control @error('password') is-invalid @enderror" id="card-password" type="password" name="password" />
+                        @error('password')
+                        <div class="invalid-feedback">
+                          {{$message}}
+                        </div>
+                        @enderror
                       </div>
                       <div class="mb-3">
                         <button class="btn btn-primary d-block w-100 mt-3" type="submit" name="submit">Log in</button>

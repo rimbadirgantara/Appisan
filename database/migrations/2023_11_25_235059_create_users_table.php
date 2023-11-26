@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('username')->unique();
             $table->string('email')->unique();
             $table->string('password');
-            $table->integer('level')->default('1');
+            $table->string('level', '5');
             $table->timestamps();
         });
     }

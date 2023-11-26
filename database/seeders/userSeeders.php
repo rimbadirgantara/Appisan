@@ -19,7 +19,7 @@ class userSeeders extends Seeder
             'username' => 'greatAdmin',
             'email' => 'greatAdmin@proton.me',
             'password'=> Hash::make('#Pinpinjur01(web)'),
-            'level' => 1
+            'level' => 'admin'
         ]);
     }
 }
