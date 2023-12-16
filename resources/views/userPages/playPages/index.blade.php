@@ -1,4 +1,4 @@
-@extends('adminPages.adminLayouts')
+@extends('userPages.UserLayouts')
 @section('content')
 <div class="d-flex mb-4 mt-3"><span class="fa-stack me-2 ms-n1"><i class="fas fa-circle fa-stack-2x text-300"></i>
   <i class="fa-inverse fa-stack-1x text-primary fas fa-percentage"></i></span>

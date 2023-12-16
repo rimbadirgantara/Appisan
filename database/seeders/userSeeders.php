@@ -18,8 +18,12 @@ class userSeeders extends Seeder
         DB::table('tbl_users')->insert([
             'username' => 'greatAdmin',
             'email' => 'greatAdmin@proton.me',
-            'password'=> Hash::make('#Pinpinjur01(web)'),
-            'level' => 'admin'
+            'password'=> Hash::make('12345678'),
+            'level' => 'admin',
+            'jenis_kelamin' => 'Laki-Laki',
+            'id_sekolah' => null,
+            'kelas' => null,
+            'profile_pict' => 'avatar.png'
         ]);
     }
 }

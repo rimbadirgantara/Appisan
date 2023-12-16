@@ -11,7 +11,7 @@
             </div>
         
         </div>
-        <div class="row">
+        {{-- <div class="row">
             <div class="col-lg-5"></div>
             <div class="col-lg">
                 <div class="">
@@ -19,7 +19,7 @@
                 </div>
             </div>
             <div class="col-5"></div>
-        </div>
+        </div> --}}
     </div>
 </section>
 
@@ -169,7 +169,7 @@
                                         </div>
                                     </div>
 
-                                    <a href="#bantuSaya" class="btn custom-btn custom-border-btn smoothscroll me-4">Tentukan !</a>
+                                    <a href="/login" class="btn custom-btn custom-border-btn smoothscroll me-4">Login Dulu !</a>
                                 </div>
                             </div>
                         </div>

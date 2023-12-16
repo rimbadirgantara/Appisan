@@ -16,19 +16,15 @@
   <!-- ===============================================-->
   <!--    Favicons-->
   <!-- ===============================================-->
-  <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('adminTemplate')}}/assets/img/favicons/apple-touch-icon.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('adminTemplate')}}/assets/img/favicons/favicon-32x32.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('adminTemplate')}}/assets/img/favicons/favicon-16x16.png">
-  <link rel="shortcut icon" type="image/x-icon" href="{{ asset('adminTemplate')}}/assets/img/favicons/favicon.ico">
-  <link rel="manifest" href="{{ asset('adminTemplate')}}/assets/img/favicons/manifest.json">
-  <meta name="msapplication-TileImage" content="{{ asset('adminTemplate')}}/assets/img/favicons/mstile-150x150.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('adminTemplate') }}/assets/img/favicons/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('adminTemplate') }}/assets/img/favicons/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('adminTemplate') }}/assets/img/favicons/favicon-16x16.png">
+  <link rel="shortcut icon" type="image/x-icon" href="{{ asset('adminTemplate') }}/assets/img/favicons/favicon.ico">
+  <link rel="manifest" href="{{ asset('adminTemplate') }}/assets/img/favicons/manifest.json">
+  <meta name="msapplication-TileImage" content="{{ asset('adminTemplate') }}/assets/img/favicons/mstile-150x150.png">
   <meta name="theme-color" content="#ffffff">
-  <script src="{{ asset('adminTemplate')}}/assets/js/config.js"></script>
-  <script src="{{ asset('adminTemplate')}}/vendors/overlayscrollbars/OverlayScrollbars.min.js"></script>
-  <script
-  src="https://code.jquery.com/jquery-3.7.1.js"
-  integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4="
-  crossorigin="anonymous"></script>
+  <script src="{{ asset('adminTemplate') }}/assets/js/config.js"></script>
+  <script src="{{ asset('adminTemplate') }}/vendors/overlayscrollbars/OverlayScrollbars.min.js"></script>
 
 
   <!-- ===============================================-->
@@ -38,11 +34,11 @@
   <link
     href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,500,600,700%7cPoppins:300,400,500,600,700,800,900&amp;display=swap"
     rel="stylesheet">
-  <link href="{{ asset('adminTemplate')}}/vendors/overlayscrollbars/OverlayScrollbars.min.css" rel="stylesheet">
-  <link href="{{ asset('adminTemplate')}}/assets/css/theme-rtl.min.css" rel="stylesheet" id="style-rtl">
-  <link href="{{ asset('adminTemplate')}}/assets/css/theme.min.css" rel="stylesheet" id="style-default">
-  <link href="{{ asset('adminTemplate')}}/assets/css/user-rtl.min.css" rel="stylesheet" id="user-style-rtl">
-  <link href="{{ asset('adminTemplate')}}/assets/css/user.min.css" rel="stylesheet" id="user-style-default">
+  <link href="{{ asset('adminTemplate') }}/vendors/overlayscrollbars/OverlayScrollbars.min.css" rel="stylesheet">
+  <link href="{{ asset('adminTemplate') }}/assets/css/theme-rtl.min.css" rel="stylesheet" id="style-rtl">
+  <link href="{{ asset('adminTemplate') }}/assets/css/theme.min.css" rel="stylesheet" id="style-default">
+  <link href="{{ asset('adminTemplate') }}/assets/css/user-rtl.min.css" rel="stylesheet" id="user-style-rtl">
+  <link href="{{ asset('adminTemplate') }}/assets/css/user.min.css" rel="stylesheet" id="user-style-default">
   <script>
     var isRTL = JSON.parse(localStorage.getItem('isRTL'));
     if (isRTL) {
@@ -89,7 +85,7 @@
               data-bs-placement="left" title="Toggle Navigation"><span class="navbar-toggle-icon"><span
                   class="toggle-line"></span></span></button>
 
-          </div><a class="navbar-brand" href="{{route('admin.index')}}">
+          </div><a class="navbar-brand" href="{{ asset('adminTemplate') }}/index.html">
             <div class="d-flex align-items-center py-3"><span class="font-sans-serif">{{$appName}}</span>
             </div>
           </a>
@@ -98,7 +94,7 @@
           <div class="navbar-vertical-content scrollbar">
             <ul class="navbar-nav flex-column mb-3" id="navbarVerticalNav">
               <li class="nav-item">
-                <a class="nav-link {{ ($segmentUrl === 'dashboard' ? 'active' : '')}}" href="{{route('admin.index')}}" role="button" aria-expanded="false">
+                <a class="nav-link {{ ($segmentUrl === 'dashboard' ? 'active' : '')}}" href="{{route('siswa.index')}}" role="button" aria-expanded="false">
                   <div class="d-flex align-items-center"><span class="nav-link-icon"><span
                         class="fas fa-chart-pie"></span></span><span class="nav-link-text ps-1">Dashboard</span>
                   </div>
@@ -113,12 +109,8 @@
                     <hr class="mb-0 navbar-vertical-divider" />
                   </div>
                 </div>
-                <a class="nav-link {{ ($segmentUrl === 'siswa' ? 'active' : '')}}" href="{{route('admin.siswa')}}" role="button" aria-expanded="false">
-                  <div class="d-flex align-items-center"><span class="nav-link-icon"><span
-                        class="fa fa-graduation-cap"></span></span><span class="nav-link-text ps-1">Siswa</span>
-                  </div>
-                </a>
-                <a class="nav-link {{ ($segmentUrl === 'kalkulasi' ? 'active' : '')}}" href="#" role="button" aria-expanded="false">
+                <a class="nav-link" href="#" role="button"
+                  aria-expanded="false">
                   <div class="d-flex align-items-center"><span class="nav-link-icon"><span
                         class="fas fa-database"></span></span><span class="nav-link-text ps-1">Data Kalkulasi</span>
                   </div>
@@ -135,10 +127,10 @@
             data-bs-toggle="collapse" data-bs-target="#navbarVerticalCollapse" aria-controls="navbarVerticalCollapse"
             aria-expanded="false" aria-label="Toggle Navigation"><span class="navbar-toggle-icon"><span
                 class="toggle-line"></span></span></button>
-          <a class="navbar-brand me-1 me-sm-3" href="{{ asset('adminTemplate')}}/index.html">
+          <a class="navbar-brand me-1 me-sm-3" href="{{ asset('adminTemplate') }}/index.html">
             <div class="d-flex align-items-center"><img class="me-2"
-                src="{{ asset('adminTemplate')}}/assets/img/icons/spot-illustrations/falcon.png" alt="" width="40" /><span
-                class="font-sans-serif">PinPilJur</span>
+                src="{{ asset('adminTemplate') }}/assets/img/icons/spot-illustrations/falcon.png" alt="" width="40" /><span
+                class="font-sans-serif">falcon</span>
             </div>
           </a>
           <ul class="navbar-nav navbar-nav-icons ms-auto flex-row align-items-center">
@@ -158,22 +150,20 @@
             <li class="nav-item dropdown"><a class="nav-link pe-0" id="navbarDropdownUser" href="#" role="button"
                 data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <div class="avatar avatar-xl">
-                  <img class="rounded-circle" src="{{ asset('adminTemplate')}}/assets/img/team/{{Auth::user()->profile_pict }}"
-                    alt="" />
+                  <img class="rounded-circle" src="{{ asset('adminTemplate') }}/assets/img/team/{{Auth::user()->profile_pict }}" alt="" />
 
                 </div>
               </a>
               <div class="dropdown-menu dropdown-menu-end py-0" aria-labelledby="navbarDropdownUser">
                 <div class="bg-white dark__bg-1000 rounded-2 py-2">
-                  <a class="dropdown-item" href="#">Settings</a>
+                  <a class="dropdown-item" href="{{ asset('adminTemplate') }}/pages/user/settings.html">Settings</a>
                   <a class="dropdown-item" href="{{route('logout')}}">Logout</a>
                 </div>
               </div>
             </li>
           </ul>
         </nav>
-        
-        @include('sweetalert::alert')
+
         @yield('content')
 
         <footer class="footer">
@@ -270,7 +260,7 @@
               data-theme-control="theme" />
             <label class="btn d-inline-block btn-navbar-style fs--1" for="themeSwitcherLight"> <span
                 class="hover-overlay mb-2 rounded d-block"><img class="img-fluid img-prototype mb-0"
-                  src="{{ asset('adminTemplate')}}/assets/img/generic/falcon-mode-default.jpg" alt="" /></span><span
+                  src="{{ asset('adminTemplate') }}/assets/img/generic/falcon-mode-default.jpg" alt="" /></span><span
                 class="label-text">Light</span></label>
           </div>
           <div class="col-6">
@@ -278,19 +268,19 @@
               data-theme-control="theme" />
             <label class="btn d-inline-block btn-navbar-style fs--1" for="themeSwitcherDark"> <span
                 class="hover-overlay mb-2 rounded d-block"><img class="img-fluid img-prototype mb-0"
-                  src="{{ asset('adminTemplate')}}/assets/img/generic/falcon-mode-dark.jpg" alt="" /></span><span class="label-text">
+                  src="{{ asset('adminTemplate') }}/assets/img/generic/falcon-mode-dark.jpg" alt="" /></span><span class="label-text">
                 Dark</span></label>
           </div>
         </div>
       </div>
       <hr />
       <div class="d-flex justify-content-between">
-        <div class="d-flex align-items-start"><img class="me-2" src="{{ asset('adminTemplate')}}/assets/img/icons/arrows-h.svg"
+        <div class="d-flex align-items-start"><img class="me-2" src="{{ asset('adminTemplate') }}/assets/img/icons/arrows-h.svg"
             width="20" alt="" />
           <div class="flex-1">
             <h5 class="fs-0">Fluid Layout</h5>
             <p class="fs--1 mb-0">Toggle container layout system </p><a class="fs--1"
-              href="{{ asset('adminTemplate')}}/documentation/customization/configuration.html">Fluid Documentation</a>
+              href="{{ asset('adminTemplate') }}/documentation/customization/configuration.html">Fluid Documentation</a>
           </div>
         </div>
         <div class="form-check form-switch">
@@ -300,7 +290,7 @@
       <hr />
       <h5 class="fs-0 d-flex align-items-center">Vertical Navbar Style</h5>
       <p class="fs--1 mb-0">Switch between styles for your vertical navbar </p>
-      <p> <a class="fs--1" href="{{ asset('adminTemplate')}}/modules/components/navs-and-tabs/vertical-navbar.html#navbar-styles">See
+      <p> <a class="fs--1" href="{{ asset('adminTemplate') }}/modules/components/navs-and-tabs/vertical-navbar.html#navbar-styles">See
           Documentation</a></p>
       <div class="btn-group d-block w-100 btn-group-navbar-style">
         <div class="row gx-2">
@@ -308,28 +298,28 @@
             <input class="btn-check" id="navbar-style-transparent" type="radio" name="navbarStyle" value="transparent"
               data-theme-control="navbarStyle" />
             <label class="btn d-block w-100 btn-navbar-style fs--1" for="navbar-style-transparent"> <img
-                class="img-fluid img-prototype" src="{{ asset('adminTemplate')}}/assets/img/generic/default.png" alt="" /><span
+                class="img-fluid img-prototype" src="{{ asset('adminTemplate') }}/assets/img/generic/default.png" alt="" /><span
                 class="label-text"> Transparent</span></label>
           </div>
           <div class="col-6">
             <input class="btn-check" id="navbar-style-inverted" type="radio" name="navbarStyle" value="inverted"
               data-theme-control="navbarStyle" />
             <label class="btn d-block w-100 btn-navbar-style fs--1" for="navbar-style-inverted"> <img
-                class="img-fluid img-prototype" src="{{ asset('adminTemplate')}}/assets/img/generic/inverted.png" alt="" /><span
+                class="img-fluid img-prototype" src="{{ asset('adminTemplate') }}/assets/img/generic/inverted.png" alt="" /><span
                 class="label-text"> Inverted</span></label>
           </div>
           <div class="col-6">
             <input class="btn-check" id="navbar-style-card" type="radio" name="navbarStyle" value="card"
               data-theme-control="navbarStyle" />
             <label class="btn d-block w-100 btn-navbar-style fs--1" for="navbar-style-card"> <img
-                class="img-fluid img-prototype" src="{{ asset('adminTemplate')}}/assets/img/generic/card.png" alt="" /><span
+                class="img-fluid img-prototype" src="{{ asset('adminTemplate') }}/assets/img/generic/card.png" alt="" /><span
                 class="label-text"> Card</span></label>
           </div>
           <div class="col-6">
             <input class="btn-check" id="navbar-style-vibrant" type="radio" name="navbarStyle" value="vibrant"
               data-theme-control="navbarStyle" />
             <label class="btn d-block w-100 btn-navbar-style fs--1" for="navbar-style-vibrant"> <img
-                class="img-fluid img-prototype" src="{{ asset('adminTemplate')}}/assets/img/generic/vibrant.png" alt="" /><span
+                class="img-fluid img-prototype" src="{{ asset('adminTemplate') }}/assets/img/generic/vibrant.png" alt="" /><span
                 class="label-text"> Vibrant</span></label>
           </div>
         </div>

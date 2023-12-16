@@ -24,7 +24,7 @@
 
                     <div class="z-index-1 position-relative"><a
                         class="link-light mb-4 font-sans-serif fs-4 d-inline-block fw-bolder"
-                        href="/login">{{$appName}}</a>
+                        href="/">{{$appName}}</a>
                       <p class="opacity-75 text-white">{{$desk}}</p>
                     </div>
                   </div>
@@ -35,6 +35,12 @@
                       <div class="col-auto">
                         <h3>Login Akun</h3>
                       </div>
+                      @if (Session::get('failed'))
+                          <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                            {{ Session::get('failed') }}
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" arialabel="Close"></button>
+                          </div>
+                        @endif
                     </div>
                     <form method="post" action="/login" novalidate="">
                       <div class="mb-3">
@@ -63,7 +69,8 @@
                         <button class="btn btn-primary d-block w-100 mt-3" type="submit" name="submit">Log in</button>
                       </div>
                     </form>
-                  </div>
+                    <a href="{{route('register')}}">Register</a>
+                </div>
                 </div>
               </div>
             </div>
