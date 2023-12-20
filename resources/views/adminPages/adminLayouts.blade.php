@@ -158,14 +158,14 @@
             <li class="nav-item dropdown"><a class="nav-link pe-0" id="navbarDropdownUser" href="#" role="button"
                 data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <div class="avatar avatar-xl">
-                  <img class="rounded-circle" src="{{ asset('adminTemplate')}}/assets/img/team/{{Auth::user()->profile_pict }}"
+                  <img class="rounded-circle" src="{{ asset('adminTemplate')}}/assets/img/profileImage/{{Auth::user()->profile_pict }}"
                     alt="" />
 
                 </div>
               </a>
               <div class="dropdown-menu dropdown-menu-end py-0" aria-labelledby="navbarDropdownUser">
                 <div class="bg-white dark__bg-1000 rounded-2 py-2">
-                  <a class="dropdown-item" href="#">Settings</a>
+                  <a class="dropdown-item" href="{{route('admin.profile')}}">Profile</a>
                   <a class="dropdown-item" href="{{route('logout')}}">Logout</a>
                 </div>
               </div>

@@ -6,7 +6,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
-// use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Auth;
 
 use App\Models\User;
 use App\Models\Sekolah;
@@ -24,6 +24,75 @@ class AdminController extends Controller
             'siswaPerempuan' => User::where('jenis_kelamin', 'Perempuan')->where('level', 'siswa')->count()
         ];
         return view('adminPages.playPages.index', $data);
+    }
+    
+    public function profile(Request $request) {
+        $data = [
+            'appName' => 'PinPilJur',
+            'title' => 'Admin Profile',
+            'segmentUrl' => $request->segments()[1],
+
+            'dataUser' => User::where('id_user', Auth::user()->id_user)->first()
+        ];
+        
+        return view('adminPages.playPages.profile', $data);
+    }
+
+    public function updateProfile(Request $request, $idUser) {
+        $user = User::find($idUser);
+        if ($request->username == $user->username) {
+            $usernameRules = 'required|min:5';
+        } else {
+            $usernameRules = 'required|unique:tbl_users,username';
+        }
+
+        if ($request->email == $user->email) {
+            $emailRules = 'required|min:8|email:rcf,dns';
+        } else {
+            $emailRules = 'required|min:8|unique:tbl_users,email|email:rcf,dns';
+        }
+
+        if ($request->hasFile('profile')) {
+            $fileRules = 'required|image|max:5120';
+        } else {
+            $fileRules = '';
+        }
+
+        if ($request->password) {
+            $password = Hash::make($request->password);
+            $pwRules = 'required|min:8';
+        } else {
+            $password = Hash::make($request->password);
+            $pwRules = '';
+        }
+        $request->validate([
+            'username' => $usernameRules,
+            'email' => $emailRules,
+            'profile' => $fileRules,
+            'password' => $pwRules
+        ]);
+
+        $user->username = $user->username = preg_replace("/\s+/", "", strtolower($request->username));
+        $user->email = $request->email;
+        $user->password = $password;
+        $file = $request->file('profile');
+        if ($request->hasFile('profile')) {
+            if (file_exists('adminTemplate/assets/img/profileImage/'.$user->profile_pict)) {
+                unlink('adminTemplate/assets/img/profileImage/'.$user->profile_pict);
+            }
+            $ext = $file->getClientOriginalExtension();
+            $fileName = time().'.'.$ext;
+            $file->move('adminTemplate/assets/img/profileImage/', $fileName);
+            $user->profile_pict = $fileName;
+        }
+
+        if ($user->save()) {
+            alert()->success('Hore!','Kamu berhasil update data !');
+            return back();
+        } else {
+            alert()->error('waduhh !','Kamu gagal update data :(');
+            return back();
+        }
     }
  
     public function tambahUserPage(Request $request){

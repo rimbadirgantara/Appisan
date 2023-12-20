@@ -17,7 +17,7 @@
 
       <div class="card-body position-relative">
         <h6>Total Siswa</h6>
-        <div class="display-4 fs-4 mb-2 fw-normal font-sans-serif text-danger" data-countup='{"endValue":{{$totalSiswa}},"decimalPlaces":0,"suffix":" Siswa"}'>0</div><a class="fw-semi-bold fs--1 text-nowrap" href="{{route('admin.siswa')}}">Lihat<span class="fas fa-angle-right ms-1" data-fa-transform="down-1"></span></a>
+        <div class="display-4 fs-4 mb-2 fw-normal font-sans-serif text-danger" data-countup='{"endValue":{{$totalSiswa}},"decimalPlaces":0,"suffix":" Siswa"}'>0</div>
       </div>
     </div>
   </div>
@@ -29,7 +29,7 @@
 
       <div class="card-body position-relative">
         <h6>Siswa Laki-Laki</h6>
-        <div class="display-4 fs-4 mb-2 fw-normal font-sans-serif text-info" data-countup='{"endValue":{{$siswaLaki}},"decimalPlaces":0,"suffix":" Siswa"}'>0</div><a class="fw-semi-bold fs--1 text-nowrap" href="{{route('admin.siswa')}}">Lihat<span class="fas fa-angle-right ms-1" data-fa-transform="down-1"></span></a>
+        <div class="display-4 fs-4 mb-2 fw-normal font-sans-serif text-info" data-countup='{"endValue":{{$siswaLaki}},"decimalPlaces":0,"suffix":" Siswa"}'>0</div>
       </div>
     </div>
   </div>
@@ -41,7 +41,7 @@
 
       <div class="card-body position-relative">
         <h6>Siswa Perempuan</h6>
-        <div class="display-4 fs-4 mb-2 fw-normal font-sans-serif text-success" data-countup='{"endValue":{{$siswaPerempuan}},"decimalPlaces":0,"suffix":" Siswa"}'>0</div><a class="fw-semi-bold fs--1 text-nowrap" href="{{route('admin.siswa')}}">Lihat<span class="fas fa-angle-right ms-1" data-fa-transform="down-1"></span></a>
+        <div class="display-4 fs-4 mb-2 fw-normal font-sans-serif text-success" data-countup='{"endValue":{{$siswaPerempuan}},"decimalPlaces":0,"suffix":" Siswa"}'>0</div>
       </div>
     </div>
   </div>

@@ -30,6 +30,9 @@ Route::middleware(['guest'])->group(function() {
 
 // admin
 Route::group(['middleware' => ['auth', 'checklevel:admin']], function () {
+  Route::get('/admin/profile', [AdminController::class, 'profile'])->name('admin.profile');
+  Route::post('/admin/profile/{id}/update', [AdminController::class, 'updateProfile']);
+  
   Route::get('/admin/dashboard', [AdminController::class, 'index'])->name('admin.index');
   Route::get('/admin/siswa', [AdminController::class, 'tambahUserPage'])->name('admin.siswa');
   Route::post('/admin/users/tambah', [AdminController:: class, 'tambahUser']);
@@ -41,6 +44,16 @@ Route::group(['middleware' => ['auth', 'checklevel:admin']], function () {
 // user
 Route::group(['middleware' => ['auth', 'checklevel:siswa']], function() {
   Route::get('/siswa/dashboard', [SiswaController::class, 'index'])->name('siswa.index');
+
+  Route::get('/siswa/keputusan', [SiswaController::class, 'halamanKeputusan'])->name('siswa.keputusan');
+  Route::get('/siswa/hasil-keputusan', [SiswaController::class, 'hasilKeputusan'])->name('siswa.hasilKeputusan');
+  Route::post('/siswa/doKeputusan', [SiswaController::class, 'doKeputusan']);
+  Route::delete('/siswa/kalkulasi/{id}/hapus', [SiswaController::class, 'hapusKalkulasi']);
+  
+  Route::get('/siswa/profile', [SiswaController::class, 'profile'])->name('siswa.profile');
+  Route::post('/siswa/profile/{id}/update', [SiswaController::class, 'updateProfile']);
+
+  
 });
 
 // logout

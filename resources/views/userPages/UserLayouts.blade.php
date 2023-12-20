@@ -109,10 +109,16 @@
                     <hr class="mb-0 navbar-vertical-divider" />
                   </div>
                 </div>
-                <a class="nav-link" href="#" role="button"
+                <a class="nav-link {{ ($segmentUrl === 'keputusan' ? 'active' : '')}}" href="{{route('siswa.keputusan')}}" role="button"
                   aria-expanded="false">
                   <div class="d-flex align-items-center"><span class="nav-link-icon"><span
-                        class="fas fa-database"></span></span><span class="nav-link-text ps-1">Data Kalkulasi</span>
+                        class="fas fa-rocket"></span></span><span class="nav-link-text ps-1">Buat Keputusan</span>
+                  </div>
+                </a>
+                <a class="nav-link {{ ($segmentUrl === 'hasil-keputusan' ? 'active' : '')}}" href="{{route('siswa.hasilKeputusan')}}" role="button"
+                  aria-expanded="false">
+                  <div class="d-flex align-items-center"><span class="nav-link-icon"><span
+                        class="far fa-chart-bar"></span></span><span class="nav-link-text ps-1">Hasil Keputusan</span>
                   </div>
                 </a>
               </li>
@@ -130,7 +136,7 @@
           <a class="navbar-brand me-1 me-sm-3" href="{{ asset('adminTemplate') }}/index.html">
             <div class="d-flex align-items-center"><img class="me-2"
                 src="{{ asset('adminTemplate') }}/assets/img/icons/spot-illustrations/falcon.png" alt="" width="40" /><span
-                class="font-sans-serif">falcon</span>
+                class="font-sans-serif">PinPilJur</span>
             </div>
           </a>
           <ul class="navbar-nav navbar-nav-icons ms-auto flex-row align-items-center">
@@ -150,13 +156,13 @@
             <li class="nav-item dropdown"><a class="nav-link pe-0" id="navbarDropdownUser" href="#" role="button"
                 data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <div class="avatar avatar-xl">
-                  <img class="rounded-circle" src="{{ asset('adminTemplate') }}/assets/img/team/{{Auth::user()->profile_pict }}" alt="" />
+                  <img class="rounded-circle" src="{{ asset('adminTemplate') }}/assets/img/profileImage/{{Auth::user()->profile_pict }}" alt="" />
 
                 </div>
               </a>
               <div class="dropdown-menu dropdown-menu-end py-0" aria-labelledby="navbarDropdownUser">
                 <div class="bg-white dark__bg-1000 rounded-2 py-2">
-                  <a class="dropdown-item" href="{{ asset('adminTemplate') }}/pages/user/settings.html">Settings</a>
+                  <a class="dropdown-item" href="{{route('siswa.profile')}}">Profile</a>
                   <a class="dropdown-item" href="{{route('logout')}}">Logout</a>
                 </div>
               </div>
@@ -164,6 +170,7 @@
           </ul>
         </nav>
 
+        @include('sweetalert::alert')
         @yield('content')
 
         <footer class="footer">
