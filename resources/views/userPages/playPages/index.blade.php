@@ -62,4 +62,113 @@
     </div>
   </div>
 </div>
+
+{{-- form tambah siswa --}}
+<div class="row mt-3">
+  <div class="col-lg-6">
+    <div class="card mb-3">
+      <div class="card-header bg-light py-2">
+        <div class="row flex-between-center">
+          <div class="col-auto">
+            <h6 class="mb-0">Tambah Siswa</h6>
+          </div>
+        </div>
+      </div>
+      <div class="card-body h-100">
+        <form action="/guru/siswa/tambah" method="post">
+          @csrf
+          <div class="row align-items-center">
+            <div class="row">
+              <div class="col-lg">
+                <div class="mb-3">
+                  <label class="form-label" for="nama">Nama</label>
+                  <input class="form-control @error('nama') is-invalid @enderror" name="nama" id="nama"
+                    type="text" required value="{{old('nama')}}" />
+                </div>
+                <span class="text-danger">
+                  @error('nama')
+                  {{ $message }}
+                  @enderror
+                </span>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-lg">
+                <div class="mb-3">
+                  <label class="form-label" for="kelas">Kelas</label>
+                  <input class="form-control @error('kelas') is-invalid @enderror" name="kelas" id="kelas"
+                    type="text" required value="{{old('kelas')}}" />
+                </div>
+                <span class="text-danger">
+                  @error('kelas')
+                  {{ $message }}
+                  @enderror
+                </span>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-lg">
+                <div class="mb-3">
+                  <label for="jenisKelamin">Jeni Kelamin</label>
+                  <select class="form-select" name="jenis_kelamin" id="jenisKelamin"
+                    aria-label="Default select example">
+                    <option selected="">Pilih Jenis Kelamin</option>
+                    <option value="Laki-laki">Laki-laki</option>
+                    <option value="Perempuan">Perempuan</option>
+                  </select>
+                  <span class="text-danger">
+                    @error('jenis_kelamin')
+                    {{ $message }}
+                    @enderror
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <button class="btn btn-success mb-3">Simpan</button>
+        </form>
+      </div>
+    </div>
+  </div>
+  <div class="col-lg-6">
+    <div class="card mb-3">
+      <div class="card-header bg-light py-2">
+        <div class="row flex-between-center">
+          <div class="col-auto">
+            <h6 class="mb-0">Daftar Siswa</h6>
+          </div>
+        </div>
+      </div>
+      <div class="card-body h-100">
+        <div class="table-responsive scrollbar">
+          <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">Name</th>
+                <th scope="col">Email</th>
+                <th class="text-end" scope="col">Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              @foreach ($dataSiswa as $i => $du)
+                <tr>
+                  <td>{{$du->nama_siswa}}</td>
+                  <td>{{$du->nama_sekolah}}</td>
+                  <td class="text-end">
+                    <div class="dropdown font-sans-serif position-static">
+                      <button class="btn btn-link text-600 btn-sm dropdown-toggle btn-reveal" type="button" data-bs-toggle="dropdown" data-boundary="window" aria-haspopup="true" aria-expanded="false"><span class="fas fa-ellipsis-h fs--1"></span></button>
+                      <div class="dropdown-menu dropdown-menu-end border py-0">
+                        <div class="bg-white py-2"><a class="dropdown-item" href="#!">Edit</a><a class="dropdown-item text-danger" href="#!">Delete</a></div>
+                      </div>
+                    </div>
+                  </td>
+                </tr>
+              @endforeach
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 @endsection

@@ -85,7 +85,7 @@
                           </div>
 
                           <div class="col-lg-6">
-                            <label class="form-label" for="kelas">Kelas</label>
+                            <label class="form-label" for="kelas">Guru Dari Kelas</label>
                             <input class="form-control @error('kelas') is-invalid @enderror" type="kelas" id="kelas" name="kelas" />
                             @error('kelas')
                             <div class="invalid-feedback">

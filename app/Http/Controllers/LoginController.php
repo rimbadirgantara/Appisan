@@ -32,9 +32,9 @@ class LoginController extends Controller
             if ($user->level == 'admin') {
                 $request->session()->regenerate();
                 return redirect()->intended('/admin/dashboard');
-            } elseif ($user->level == 'siswa') {
+            } elseif ($user->level == 'guru') {
                 $request->session()->regenerate();
-                return redirect()->intended('/siswa/dashboard');
+                return redirect()->intended('/guru/dashboard');
             } else {
                 return back()->with('failed', 'Maaf, Terjadi Kesalahan !');
             }
@@ -65,7 +65,7 @@ class LoginController extends Controller
         $user = new User;
         $user->username = preg_replace("/\s+/", "", strtolower($request->username));
         $user->email = $request->email;
-        $user->level = 'siswa';
+        $user->level = 'guru';
         $user->jenis_kelamin = $request->jenis_kelamin;
         $user->profile_pict = 'avatar.png';
         $user->password = Hash::make($request->password);

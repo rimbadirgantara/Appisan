@@ -118,9 +118,9 @@
                         class="fa fa-graduation-cap"></span></span><span class="nav-link-text ps-1">Siswa</span>
                   </div>
                 </a>
-                <a class="nav-link {{ ($segmentUrl === 'kalkulasi' ? 'active' : '')}}" href="#" role="button" aria-expanded="false">
+                <a class="nav-link {{ ($segmentUrl === 'data-keputusan' ? 'active' : '')}}" href="{{route('admin.dataKeputusan')}}" role="button" aria-expanded="false">
                   <div class="d-flex align-items-center"><span class="nav-link-icon"><span
-                        class="fas fa-database"></span></span><span class="nav-link-text ps-1">Data Kalkulasi</span>
+                        class="fas fa-database"></span></span><span class="nav-link-text ps-1">Data Keputusan Siswa</span>
                   </div>
                 </a>
               </li>

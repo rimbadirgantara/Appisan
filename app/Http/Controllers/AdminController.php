@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Auth;
 
 use App\Models\User;
 use App\Models\Sekolah;
+use DB;
 
 class AdminController extends Controller
 {
@@ -208,6 +209,34 @@ class AdminController extends Controller
             return back();
         } else {
             alert()->success('Waduhh !','Siswa gagal di update !');
+            return back();
+        }
+    }
+
+    public function dataKeputusan(Request $request) {
+        $title = 'Hapus Data!';
+        $text = "Apakah yakin ingin hapus data ini ?";
+        confirmDelete($title, $text);
+        $data = [
+            'appName' => 'PinPilJur',
+            'title' => 'Data Keputusan Siswa',
+            'segmentUrl' => $request->segments()[1],
+
+            'dataUser' => User::select('*')
+                                        ->join('tbl_sekolah', 'tbl_users.id_sekolah', '=', 'tbl_sekolah.id_sekolah')
+                                        ->join('tbl_hasil_kalkulasi', 'tbl_users.id_user', '=', 'tbl_hasil_kalkulasi.id_user')
+                                        ->where('tbl_users.level', 'siswa')->paginate(100)
+        ];
+        return view('adminPages.playPages.dataKeputusan', $data);
+    }
+
+    public function hapusKalkulasi($id){
+        $a = DB::table('tbl_hasil_kalkulasi')->where('id_user', $id);
+        if ($a->delete()) {
+            alert()->success('Hore!','Data berhasil di hapus !');
+            return back();
+        } else {
+            alert()->error('Waduhh !','Data gagal di hapus !');
             return back();
         }
     }

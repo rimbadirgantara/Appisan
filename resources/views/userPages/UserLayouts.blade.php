@@ -94,7 +94,7 @@
           <div class="navbar-vertical-content scrollbar">
             <ul class="navbar-nav flex-column mb-3" id="navbarVerticalNav">
               <li class="nav-item">
-                <a class="nav-link {{ ($segmentUrl === 'dashboard' ? 'active' : '')}}" href="{{route('siswa.index')}}" role="button" aria-expanded="false">
+                <a class="nav-link {{ ($segmentUrl === 'dashboard' ? 'active' : '')}}" href="{{route('guru.index')}}" role="button" aria-expanded="false">
                   <div class="d-flex align-items-center"><span class="nav-link-icon"><span
                         class="fas fa-chart-pie"></span></span><span class="nav-link-text ps-1">Dashboard</span>
                   </div>
@@ -109,13 +109,13 @@
                     <hr class="mb-0 navbar-vertical-divider" />
                   </div>
                 </div>
-                <a class="nav-link {{ ($segmentUrl === 'keputusan' ? 'active' : '')}}" href="{{route('siswa.keputusan')}}" role="button"
+                <a class="nav-link {{ ($segmentUrl === 'keputusan' ? 'active' : '')}}" href="{{route('guru.keputusan')}}" role="button"
                   aria-expanded="false">
                   <div class="d-flex align-items-center"><span class="nav-link-icon"><span
                         class="fas fa-rocket"></span></span><span class="nav-link-text ps-1">Buat Keputusan</span>
                   </div>
                 </a>
-                <a class="nav-link {{ ($segmentUrl === 'hasil-keputusan' ? 'active' : '')}}" href="{{route('siswa.hasilKeputusan')}}" role="button"
+                <a class="nav-link {{ ($segmentUrl === 'hasil-keputusan' ? 'active' : '')}}" href="{{route('guru.hasilKeputusan')}}" role="button"
                   aria-expanded="false">
                   <div class="d-flex align-items-center"><span class="nav-link-icon"><span
                         class="far fa-chart-bar"></span></span><span class="nav-link-text ps-1">Hasil Keputusan</span>
@@ -162,7 +162,7 @@
               </a>
               <div class="dropdown-menu dropdown-menu-end py-0" aria-labelledby="navbarDropdownUser">
                 <div class="bg-white dark__bg-1000 rounded-2 py-2">
-                  <a class="dropdown-item" href="{{route('siswa.profile')}}">Profile</a>
+                  <a class="dropdown-item" href="{{route('guru.profile')}}">Profile</a>
                   <a class="dropdown-item" href="{{route('logout')}}">Logout</a>
                 </div>
               </div>

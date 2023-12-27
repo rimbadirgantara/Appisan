@@ -17,9 +17,8 @@
         <thead>
           <tr>
             <th scope="col">No</th>
-            <th scope="col">Teknik Informatika</th>
-            <th scope="col">Teknik Mesin</th>
-            <th scope="col">Administrasi Bisnis</th>
+            <th scope="col">Nama Jurusan</th>
+            <th scope="col">Nilai</th>
             <th class="text-end" scope="col">Aksi</th>
           </tr>
         </thead>
@@ -27,12 +26,11 @@
           @foreach ($dataHasil as $num => $dh)
             <tr>
               <td>{{$num+1}}</td>
-              <td>{{$dh->teknik_informatika}}</td>
-              <td>{{$dh->teknik_mesin}}</td>
-              <td>{{$dh->adm}}</td>
+              <td>{{$dh->nama_jurusan}}</td>
+              <td>{{$dh->nilai}}</td>
               <td class="text-end">
                 <div>
-                  <a href="/siswa/kalkulasi/{{$dh['id_kalkulasi']}}/hapus" class="btn btn-sm btn-danger" type="button"
+                  <a href="/siswa/kalkulasi/{{$dh['id_user']}}/hapus" class="btn btn-sm btn-danger" type="button"
                   data-bs-toggle="tooltip" data-bs-placement="top" title="Delete" data-confirm-delete="true"><span
                     class="fas fa-trash-alt"></span></a>
                 </div>

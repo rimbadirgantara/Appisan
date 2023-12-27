@@ -3,7 +3,7 @@
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LoginController;
-use App\Http\Controllers\SiswaController;
+use App\Http\Controllers\GuruController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -39,21 +39,23 @@ Route::group(['middleware' => ['auth', 'checklevel:admin']], function () {
   Route::delete('/admin/siswa/{id}/hapus', [AdminController::class, 'hapusUser']);
   Route::get('/admin/siswa/{id}/edit', [AdminController::class, 'editUser']);
   Route::post('/admin/siswa/{id}/doUpdate', [AdminController::class, 'doUpdateUser']);
+
+  Route::get('/admin/data-keputusan', [AdminController::class, 'dataKeputusan'])->name('admin.dataKeputusan');
+  Route::delete('/admin/siswa/keputusan/{id}/hapus', [AdminController::class, 'hapusKalkulasi']);
 });
 
 // user
-Route::group(['middleware' => ['auth', 'checklevel:siswa']], function() {
-  Route::get('/siswa/dashboard', [SiswaController::class, 'index'])->name('siswa.index');
+Route::group(['middleware' => ['auth', 'checklevel:guru']], function() {
+  Route::get('/guru/dashboard', [GuruController::class, 'index'])->name('guru.index');
 
-  Route::get('/siswa/keputusan', [SiswaController::class, 'halamanKeputusan'])->name('siswa.keputusan');
-  Route::get('/siswa/hasil-keputusan', [SiswaController::class, 'hasilKeputusan'])->name('siswa.hasilKeputusan');
-  Route::post('/siswa/doKeputusan', [SiswaController::class, 'doKeputusan']);
-  Route::delete('/siswa/kalkulasi/{id}/hapus', [SiswaController::class, 'hapusKalkulasi']);
-  
-  Route::get('/siswa/profile', [SiswaController::class, 'profile'])->name('siswa.profile');
-  Route::post('/siswa/profile/{id}/update', [SiswaController::class, 'updateProfile']);
-
-  
+  Route::get('/guru/keputusan', [GuruController::class, 'halamanKeputusan'])->name('guru.keputusan');
+  Route::get('/guru/hasil-keputusan', [GuruController::class, 'hasilKeputusan'])->name('guru.hasilKeputusan');
+  Route::post('/guru/prekalkulasi', [GuruController::class, 'prekalkulasi']);
+  Route::get('/guru/doKeputusan', [GuruController::class, 'doKeputusan']);
+  Route::delete('/guru/prekalkulasi/{id}/hapus', [GuruController::class, 'hapusPrekalkulasi']);
+  Route::get('/guru/profile', [GuruController::class, 'profile'])->name('guru.profile');
+  Route::post('/guru/profile/{id}/update', [GuruController::class, 'updateProfile']);
+  Route::post('/guru/siswa/tambah', [GuruController::class, 'tambahSiswa']);  
 });
 
 // logout
