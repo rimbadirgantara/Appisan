@@ -6,7 +6,7 @@
     <h5 class="mb-0 text-primary position-relative"><span class="bg-200 dark__bg-1100 pe-3">{{$title}}</span><span
         class="border position-absolute top-50 translate-middle-y w-100 start-0 z-index--1"></span>
     </h5>
-    <p class="mb-0"><a href="{{route('siswa.index')}}">Siswa</a> / {{$title}}</p>
+    <p class="mb-0"><a href="{{route('guru.index')}}">Guru</a> / {{$title}}</p>
   </div>
 </div>
 
@@ -17,6 +17,7 @@
         <thead>
           <tr>
             <th scope="col">No</th>
+            <th scope="col">Nama</th>
             <th scope="col">Nama Jurusan</th>
             <th scope="col">Nilai</th>
             <th class="text-end" scope="col">Aksi</th>
@@ -26,6 +27,7 @@
           @foreach ($dataHasil as $num => $dh)
             <tr>
               <td>{{$num+1}}</td>
+              <td>{{$dh->nama_siswa}}</td>
               <td>{{$dh->nama_jurusan}}</td>
               <td>{{$dh->nilai}}</td>
               <td class="text-end">

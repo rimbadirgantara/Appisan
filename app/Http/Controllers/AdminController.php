@@ -137,7 +137,7 @@ class AdminController extends Controller
             alert()->success('Hore!','User berhasil di buat !');
             return back();
         } else {
-            alert()->success('Waduhh !','User gagal di buat !');
+            alert()->warning('Waduhh !','User gagal di buat !');
             return back();
         }
     }

@@ -177,18 +177,7 @@ class GuruController extends Controller
 
     public function doKeputusan(Request $request)
     {
-
-        $hasil_kalkulasi = [
-            'penghasilanOrangTua' => [],
-            'akreditas' => [],
-            'beasiswa' => [],
-            'ormas' => [],
-            'nilai_semester' => [],
-            'prestasi' => [],
-            'fasilitas' => [],
-            'dosen' => []
-        ];
-
+        $hasil_kalkulasi = [];
 
         // penghasilan orang tua
         $penghasilanOrangTua = Prekalkulasi::select('penghasilan_orang_tua')
@@ -196,11 +185,12 @@ class GuruController extends Controller
             ->get()->toArray();
 
         $maxPenghasilanOrangTua = max($penghasilanOrangTua);
-
+        $portu = [];
         for ($i = 0; $i < count($penghasilanOrangTua); $i++) {
             // Perform the calculation and append the result to the array
-            $hasil_kalkulasi['penghasilanOrangTua'][] = $penghasilanOrangTua[$i]['penghasilan_orang_tua'] / $maxPenghasilanOrangTua['penghasilan_orang_tua'];
+            $portu[] = $penghasilanOrangTua[$i]['penghasilan_orang_tua'] / $maxPenghasilanOrangTua['penghasilan_orang_tua'];
         }
+        $hasil_kalkulasi[] = $portu;
 
         //akreditas
         $akreditas = Prekalkulasi::select('akreditas')
@@ -208,10 +198,12 @@ class GuruController extends Controller
             ->get()->toArray();
 
         $maxAkreditas = max($akreditas);
-
+        $akre = [];
         for ($i = 0; $i < count($akreditas); $i++) {
-            $hasil_kalkulasi['akreditas'][] = $akreditas[$i]['akreditas'] / $maxAkreditas['akreditas'];
+            $akre[] = $akreditas[$i]['akreditas'] / $maxAkreditas['akreditas'];
         }
+        $hasil_kalkulasi[] = $akre;
+
 
         // beasiswa
         $beasiswa = Prekalkulasi::select('beasiswa')
@@ -219,10 +211,11 @@ class GuruController extends Controller
             ->get()->toArray();
 
         $maxBeasiswa = max($beasiswa);
-
+        $bea = [];
         for ($i = 0; $i < count($beasiswa); $i++) {
-            $hasil_kalkulasi['beasiswa'][] = $beasiswa[$i]['beasiswa'] / $maxBeasiswa['beasiswa'];
+            $bea[] = $beasiswa[$i]['beasiswa'] / $maxBeasiswa['beasiswa'];
         }
+        $hasil_kalkulasi[] = $bea;
 
         // ormas
         $ormas = Prekalkulasi::select('ormas')
@@ -230,10 +223,11 @@ class GuruController extends Controller
             ->get()->toArray();
 
         $maxOrmas = max($ormas);
-
+        $or = [];
         for ($i = 0; $i < count($ormas); $i++) {
-            $hasil_kalkulasi['ormas'][] = $ormas[$i]['ormas'] / $maxOrmas['ormas'];
+            $or[] = $ormas[$i]['ormas'] / $maxOrmas['ormas'];
         }
+        $hasil_kalkulasi[] = $or;
 
         // nilai semester
         $nilaiSemester = Prekalkulasi::select('nilai_semester_5')
@@ -241,10 +235,11 @@ class GuruController extends Controller
             ->get()->toArray();
 
         $maxNilaiSemester = max($nilaiSemester);
-
+        $nilai = [];
         for ($i = 0; $i < count($nilaiSemester); $i++) {
-            $hasil_kalkulasi['nilai_semester'][] = $nilaiSemester[$i]['nilai_semester_5'] / $maxNilaiSemester['nilai_semester_5'];
+            $nilai[] = $nilaiSemester[$i]['nilai_semester_5'] / $maxNilaiSemester['nilai_semester_5'];
         }
+        $hasil_kalkulasi[] = $nilai;
 
         // pretasi
         $prestasi = Prekalkulasi::select('prestasi')
@@ -252,10 +247,11 @@ class GuruController extends Controller
             ->get()->toArray();
 
         $maxPrestasi = max($prestasi);
-
+        $pres = [];
         for ($i = 0; $i < count($prestasi); $i++) {
-            $hasil_kalkulasi['prestasi'][] = $prestasi[$i]['prestasi'] / $maxPrestasi['prestasi'];
+            $pres[] = $prestasi[$i]['prestasi'] / $maxPrestasi['prestasi'];
         }
+        $hasil_kalkulasi[] = $pres;
 
         // fasilitas
         $fasilitas = Prekalkulasi::select('fasilitas')
@@ -263,10 +259,11 @@ class GuruController extends Controller
             ->get()->toArray();
 
         $maxFasilitas = max($fasilitas);
-
+        $fasi = [];
         for ($i = 0; $i < count($fasilitas); $i++) {
-            $hasil_kalkulasi['fasilitas'][] = $fasilitas[$i]['fasilitas'] / $maxFasilitas['fasilitas'];
+            $fasi[] = $fasilitas[$i]['fasilitas'] / $maxFasilitas['fasilitas'];
         }
+        $hasil_kalkulasi[] = $fasi;
 
         // dosen
         $dosen = Prekalkulasi::select('dosen')
@@ -274,18 +271,73 @@ class GuruController extends Controller
             ->get()->toArray();
 
         $maxDosen = max($dosen);
-
+        $dos = [];
         for ($i = 0; $i < count($dosen); $i++) {
-            $hasil_kalkulasi['dosen'][] = $dosen[$i]['dosen'] / $maxDosen['dosen'];
+            $dos[] = $dosen[$i]['dosen'] / $maxDosen['dosen'];
+        }
+        $hasil_kalkulasi[] = $dos;
+
+        $jumlah_kolom = count($hasil_kalkulasi[0]); // Jumlah kolom dalam matriks
+        $jumlah_baris = count($hasil_kalkulasi);    // Jumlah baris dalam matriks
+
+        // Inisialisasi array untuk menyimpan hasil penjumlahan setiap kolom
+        $hasil_penjumlahan_kolom = array_fill(0, $jumlah_kolom, 0);
+
+        // Perulangan untuk menjumlahkan kolom-kolom setelah dikalikan dengan 20% pada putaran pertama dan kelima
+        for ($i = 0; $i < $jumlah_baris; $i++) {
+            for ($j = 0; $j < $jumlah_kolom; $j++) {
+                $faktor_pengali = ($i == 0 || $i == 4) ? 0.2 : 0.1; // 20% untuk putaran pertama dan kelima, 10% untuk putaran lainnya
+                $hasil_kalkulasi[$i][$j] *= $faktor_pengali; // Kalikan dengan faktor pengali
+                $hasil_penjumlahan_kolom[$j] += $hasil_kalkulasi[$i][$j];
+            }
         }
 
-        
-        // foreach ($hasil_kalkulasi as $key => $value) {
-        //     var_dump($hasil_kalkulasi[$key]);
-        //     for ($i=0; $i < count($hasil_kalkulasi[$key]); $i++) { 
-        //         var_dump($hasil_kalkulasi[$key][$i] * 0.1);
-        //     }
-        // }
+        $dataSiswa = Prekalkulasi::select("tbl_siswa.id_siswa")
+            ->join('tbl_siswa', 'tbl_prekalkulasi.id_siswa', '=', 'tbl_siswa.id_siswa')->get();
+        foreach ($dataSiswa as $key => $value) {
+            $hasilKalkulasi = new HasilKalkulasi;
+            $hasilKalkulasi->id_user = Auth::user()->id_user;
+            $hasilKalkulasi->id_siswa = $dataSiswa[$key]['id_siswa'];
+            $hasilKalkulasi->nama_jurusan = $this->penentuanJurusan($hasil_penjumlahan_kolom[$key]);
+            $hasilKalkulasi->nilai = $hasil_penjumlahan_kolom[$key];
+            $hasilKalkulasi->save();
+        }
+
+        alert()->success('Hore !','Berhasil Memutuskan Jurusan Siswa !');
+        return back();
+    }
+
+    private function penentuanJurusan($data)
+    {
+        $jurusan = null;
+            switch (true) {
+                case ($data <= 0.125):
+                    $jurusan = 'Bahasa Inggris';
+                    break;
+                case ($data <= 0.250):
+                    $jurusan = 'Administrasi Niaga';
+                    break;
+                case ($data <= 0.375):
+                    $jurusan = 'Teknik Informatika';
+                    break;
+                case ($data <= 0.5):
+                    $jurusan = 'Teknik Sipil';
+                    break;
+                case ($data <= 0.625):
+                    $jurusan = 'Teknik Elektro';
+                    break;
+                case ($data <= 0.75):
+                    $jurusan = 'Teknik Mesin';
+                    break;
+                case ($data <= 0.875):
+                    $jurusan = 'Teknik Perkapalan';
+                    break;
+                case ($data <= 1):
+                    $jurusan = 'Maritim';
+                    break;
+            }
+
+        return $jurusan;
     }
 
     public function hasilKeputusan(Request $request)
@@ -298,7 +350,7 @@ class GuruController extends Controller
             'title' => 'Hasil Keputusan',
             'segmentUrl' => $request->segments()[1],
             'dataHasil' => HasilKalkulasi::select('*')
-                ->join('tbl_users', 'tbl_hasil_kalkulasi.id_user', '=', 'tbl_users.id_user')
+                ->join('tbl_siswa', 'tbl_hasil_kalkulasi.id_siswa', '=', 'tbl_siswa.id_siswa')
                 ->where('tbl_hasil_kalkulasi.id_user', Auth::user()->id_user)->paginate(100)
         ];
         return view('userPages.playPages.hasilKeputusan', $data);

@@ -12,6 +12,6 @@ class HasilKalkulasi extends Model
     protected $primaryKey = 'id_kalkulasi';
 
     protected $fillable = [
-        'id_user', 'nama_jurusan', 'nilai'
+        'id_user', 'id_siswa', 'nama_jurusan', 'nilai'
     ];
 }
