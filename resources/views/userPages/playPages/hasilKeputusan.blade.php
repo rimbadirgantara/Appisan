@@ -32,7 +32,7 @@
               <td>{{$dh->nilai}}</td>
               <td class="text-end">
                 <div>
-                  <a href="/siswa/kalkulasi/{{$dh['id_user']}}/hapus" class="btn btn-sm btn-danger" type="button"
+                  <a href="/guru/hasil-keputusan/{{$dh['id_user']}}/hapus" class="btn btn-sm btn-danger" type="button"
                   data-bs-toggle="tooltip" data-bs-placement="top" title="Delete" data-confirm-delete="true"><span
                     class="fas fa-trash-alt"></span></a>
                 </div>

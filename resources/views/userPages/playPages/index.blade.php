@@ -154,13 +154,10 @@
                 <tr>
                   <td>{{$du->nama_siswa}}</td>
                   <td>{{$du->nama_sekolah}}</td>
-                  <td class="text-end">
-                    <div class="dropdown font-sans-serif position-static">
-                      <button class="btn btn-link text-600 btn-sm dropdown-toggle btn-reveal" type="button" data-bs-toggle="dropdown" data-boundary="window" aria-haspopup="true" aria-expanded="false"><span class="fas fa-ellipsis-h fs--1"></span></button>
-                      <div class="dropdown-menu dropdown-menu-end border py-0">
-                        <div class="bg-white py-2"><a class="dropdown-item" href="#!">Edit</a><a class="dropdown-item text-danger" href="#!">Delete</a></div>
-                      </div>
-                    </div>
+                  <td class="text-end"> 
+                    <a href="/guru/siswa/{{$du->id_siswa}}/hapus" class="btn btn-sm btn-danger" type="button"
+                      data-bs-toggle="tooltip" data-bs-placement="top" title="Delete" data-confirm-delete="true"><span
+                        class="fas fa-trash-alt"></span></a>
                   </td>
                 </tr>
               @endforeach

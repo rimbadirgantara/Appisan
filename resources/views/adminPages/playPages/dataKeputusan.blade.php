@@ -14,7 +14,8 @@
       <table class="table">
         <thead>
           <tr>
-            <th scope="col">Username</th>
+            <th scope="col">Nama Siswa</th>
+            <th scope="col">Sekolah</th>
             <th scope="col">Pilihan</th>
             <th scope="col">Nilai</th>
             <th class="text-end" scope="col">Aksi</th>
@@ -23,12 +24,13 @@
         <tbody>
           @foreach ($dataUser as $du)
           <tr>
-            <td>{{$du['username']}}</td>
+            <td>{{$du['nama_siswa']}}</td>
+            <td>{{$du['nama_sekolah']}}</td>
             <td>{{$du['nama_jurusan']}}</td>
             <td>{{$du['nilai']}}</td>
             <td class="text-end">
               <div>
-                <a href="/admin/siswa/keputusan/{{$du['id_user']}}/hapus" class="btn btn-sm btn-danger" type="button"
+                <a href="/admin/siswa/keputusan/{{$du['id_kalkulasi']}}/hapus" class="btn btn-sm btn-danger" type="button"
                   data-bs-toggle="tooltip" data-bs-placement="top" title="Delete" data-confirm-delete="true"><span
                     class="fas fa-trash-alt"></span></a>
               </div>
@@ -37,7 +39,6 @@
           @endforeach
         </tbody>
       </table>
-      {{$dataUser->links()}}
     </div>
   </div>
 </div>

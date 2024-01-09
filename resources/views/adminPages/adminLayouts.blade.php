@@ -113,6 +113,11 @@
                     <hr class="mb-0 navbar-vertical-divider" />
                   </div>
                 </div>
+                <a class="nav-link {{ ($segmentUrl === 'guru' ? 'active' : '')}}" href="{{route('admin.guru')}}" role="button" aria-expanded="false">
+                  <div class="d-flex align-items-center"><span class="nav-link-icon"><span
+                        class="fa fa-graduation-cap"></span></span><span class="nav-link-text ps-1">Guru</span>
+                  </div>
+                </a>
                 <a class="nav-link {{ ($segmentUrl === 'siswa' ? 'active' : '')}}" href="{{route('admin.siswa')}}" role="button" aria-expanded="false">
                   <div class="d-flex align-items-center"><span class="nav-link-icon"><span
                         class="fa fa-graduation-cap"></span></span><span class="nav-link-text ps-1">Siswa</span>

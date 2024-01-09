@@ -9,7 +9,7 @@
   <div class="card-body position-relative">
     <div class="row">
       <div class="col-lg-8">
-        <h3>Update Untuk "{{$dataUser['username']}}"</h3>
+        <h3>Update Untuk "{{$dataUser['nama_siswa']}}"</h3>
       </div>
     </div>
   </div>
@@ -29,35 +29,21 @@
         <button type="button" class="btn-close" data-bs-dismiss="alert" arialabel="Close"></button>
       </div>
       @endif
-      <form action="/admin/guru/{{$dataUser['id_user']}}/doUpdate" method="post">
+      <form action="/admin/siswa/{{$dataUser['id_siswa']}}/doUpdate" method="post">
         @csrf
         <div class="row">
           <div class="col-lg-6">
             <div class="mb-3">
-              <label class="form-label" for="username">Username</label>
-              <input class="form-control @error('username') is-invalid @enderror" id="username" name="username"
-                type="text" value="{{$dataUser['username']}}" />
-              @error('username')
+              <label class="form-label" for="nama">Nama Siswa</label>
+              <input class="form-control @error('nama') is-invalid @enderror" id="nama" name="nama"
+                type="text" value="{{$dataUser['nama_siswa']}}" />
+              @error('nama')
               <div class="invalid-feedback">
                 {{$message}}
               </div>
               @enderror
             </div>
           </div>
-          <div class="col-lg-6">
-            <div class="mb-3">
-              <label class="form-label" for="email">Email</label>
-              <input class="form-control @error('email') is-invalid @enderror" id="email" name="email" type="text"
-                value="{{$dataUser['email']}}" />
-              @error('email')
-              <div class="invalid-feedback">
-                {{$message}}
-              </div>
-              @enderror
-            </div>
-          </div>
-        </div>
-        <div class="row">
           <div class="col-lg-6">
             <div class="mb-3">
               <label class="form-label" for="nama_sekolah">Nama Sekolah</label>
@@ -77,6 +63,8 @@
               @enderror
             </div>
           </div>
+        </div>
+        <div class="row">
           <div class="col-lg-6">
             <div class="mb-3">
               <label class="form-label" for="kelas">Kelas</label>
@@ -89,8 +77,6 @@
               @enderror
             </div>
           </div>
-        </div>
-        <div class="row">
           <div class="col-lg-6">
             <div class="mb-3">
               <label class="form-label" for="jenisKelamin">Jenis Kelamin</label>
@@ -103,18 +89,6 @@
                 @endif
               </select>
               @error('jenis_kelamin')
-              <div class="invalid-feedback">
-                {{$message}}
-              </div>
-              @enderror
-            </div>
-          </div>
-          <div class="col-lg-6">
-            <div class="mb-3">
-              <label class="form-label" for="password">Password</label>
-              <input class="form-control @error('password') is-invalid @enderror" id="password" name="password"
-                type="password" />
-              @error('password')
               <div class="invalid-feedback">
                 {{$message}}
               </div>

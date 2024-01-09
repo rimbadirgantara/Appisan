@@ -17,14 +17,17 @@ class GuruController extends Controller
 {
     public function index(Request $request)
     {
+        $title = 'Hapus Data!';
+        $text = "Apakah yakin ingin hapus data ini ?";
+        confirmDelete($title, $text);
         $data = [
             'appName' => 'PinPilJur',
             'title' => 'Dashboard Guru',
             'segmentUrl' => $request->segments()[1],
 
             'totalSiswa' => Siswa::where('id_sekolah', Auth::user()->id_sekolah)->count(),
-            'siswaLaki' => Siswa::where('jenis_kelamin', 'Laki-laki')->count(),
-            'siswaPerempuan' => Siswa::where('jenis_kelamin', 'Perempuan')->count(),
+            'siswaLaki' => Siswa::where('jenis_kelamin', 'Laki-laki')->where('id_sekolah', Auth::user()->id_sekolah)->count(),
+            'siswaPerempuan' => Siswa::where('jenis_kelamin', 'Perempuan')->where('id_sekolah', Auth::user()->id_sekolah)->count(),
 
             'dataSiswa' => Siswa::select('tbl_siswa.*', 'tbl_sekolah.*')
                 ->join('tbl_sekolah', 'tbl_siswa.id_sekolah', '=', 'tbl_sekolah.id_sekolah')
@@ -32,6 +35,18 @@ class GuruController extends Controller
                 ->paginate(100),
         ];
         return view('userPages.playPages.index', $data);
+    }
+
+    public function hapusSiswa($id)
+    {
+        $a = Siswa::find($id);
+        if ($a->delete()) {
+            alert()->success('Hore!', 'Siswa berhasil di hapus !');
+            return back();
+        } else {
+            alert()->error('Waduhh !', 'Siswa gagal di hapus !');
+            return back();
+        }
     }
 
     public function profile(Request $request)
@@ -123,8 +138,10 @@ class GuruController extends Controller
 
             'dataSiswa' => Siswa::where('id_sekolah', Auth::user()->id_sekolah)->get(),
             'dataPrekalkulasi' => Prekalkulasi::select("*")
-                ->join('tbl_siswa', 'tbl_prekalkulasi.id_siswa', '=', 'tbl_siswa.id_siswa')->get()
+                ->join('tbl_siswa', 'tbl_prekalkulasi.id_siswa', '=', 'tbl_siswa.id_siswa')
+                ->where('id_user', Auth::user()->id_user)->get()
         ];
+
         return view('userPages.playPages.keputusan', $data);
     }
 
@@ -354,6 +371,18 @@ class GuruController extends Controller
                 ->where('tbl_hasil_kalkulasi.id_user', Auth::user()->id_user)->paginate(100)
         ];
         return view('userPages.playPages.hasilKeputusan', $data);
+    }
+
+    public function hasilKeputusanHapus($id)
+    {
+        $a = DB::table('tbl_hasil_kalkulasi')->where('id_user', $id);
+        if ($a->delete()) {
+            alert()->success('Hore!','Data berhasil di hapus !');
+            return back();
+        } else {
+            alert()->error('Waduhh !','Data gagal di hapus !');
+            return back();
+        }
     }
 
     public function tambahSiswa(Request $request)

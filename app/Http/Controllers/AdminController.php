@@ -9,7 +9,9 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 
 use App\Models\User;
+use App\Models\Siswa;
 use App\Models\Sekolah;
+use App\Models\HasilKalkulasi;
 use DB;
 
 class AdminController extends Controller
@@ -96,21 +98,22 @@ class AdminController extends Controller
         }
     }
  
-    public function tambahUserPage(Request $request){
+    public function tambahGuruPage(Request $request){
         $title = 'Hapus Data!';
         $text = "Apakah yakin ingin hapus data ini ?";
         confirmDelete($title, $text);
         $data = [
             'appName' => 'PinPilJur',
-            'title' => 'Siswa',
+            'title' => 'Guru',
             'segmentUrl' => $request->segments()[1],
 
             'dataUser' => User::select('tbl_users.*', 'tbl_sekolah.*')
                                         ->join('tbl_sekolah', 'tbl_users.id_sekolah', '=', 'tbl_sekolah.id_sekolah')
-                                        ->where('tbl_users.level', 'siswa')->paginate(100),
+                                        ->where('tbl_users.level', 'guru')->get(),
             'listSekolah' => Sekolah::all()
         ];
-        return view('adminPages.playPages.user', $data);
+
+        return view('adminPages.playPages.user', $data); 
     }
 
     public function tambahUser(Request $request) {
@@ -156,7 +159,7 @@ class AdminController extends Controller
     public function editUser($id_user, Request $request){
         $data = [
             'appName' => 'PinPilJur',
-            'title' => 'Edit Siswa',
+            'title' => 'Edit Guru',
             'segmentUrl' => $request->segments()[1],
             'dataUser' => User::select('tbl_users.*', 'tbl_sekolah.*')
                             ->join('tbl_sekolah', 'tbl_users.id_sekolah', '=', 'tbl_sekolah.id_sekolah')
@@ -213,6 +216,96 @@ class AdminController extends Controller
         }
     }
 
+    public function tambahSiswaPage(Request $request){
+        $title = 'Hapus Data!';
+        $text = "Apakah yakin ingin hapus data ini ?";
+        confirmDelete($title, $text);
+        $data = [
+            'appName' => 'PinPilJur',
+            'title' => 'Siswa',
+            'segmentUrl' => $request->segments()[1],
+
+            'dataUser' => Siswa::select('tbl_siswa.*', 'tbl_sekolah.*')
+                                        ->join('tbl_sekolah', 'tbl_siswa.id_sekolah', '=', 'tbl_sekolah.id_sekolah')->get(),
+            'listSekolah' => Sekolah::all()
+        ];
+
+        return view('adminPages.playPages.siswa', $data); 
+    }
+
+    public function hapusSiswa($id) {
+        $a = Siswa::find($id);
+        if ($a->delete()) {
+            alert()->success('Hore!','Siswa berhasil di hapus !');
+            return back();
+        } else {
+            alert()->error('Waduhh !','Siswa gagal di hapus !');
+            return back();
+        }
+    }
+
+    public function tambahSiswa(Request $request) {
+        $request->validate([
+            'nama' => 'required|min:5',
+            'nama_sekolah' => 'required|numeric',
+            'kelas' => 'required|numeric',
+            'jenis_kelamin' => 'required|min:5',
+        ]);
+        
+        $user = new Siswa;
+        $user->nama_siswa = $request->nama;
+        $user->jenis_kelamin = $request->jenis_kelamin;
+        $user->id_sekolah = $request->nama_sekolah;
+        $user->kelas = $request->kelas;
+
+        if ($user->save()) {
+            alert()->success('Hore!','User berhasil di buat !');
+            return back();
+        } else {
+            alert()->warning('Waduhh !','User gagal di buat !');
+            return back();
+        }
+    }
+
+    public function editSiswa($id, Request $request){
+        $data = [
+            'appName' => 'PinPilJur',
+            'title' => 'Edit Siswa',
+            'segmentUrl' => $request->segments()[1],
+            'dataUser' => Siswa::select('tbl_siswa.*', 'tbl_sekolah.*')
+                            ->join('tbl_sekolah', 'tbl_siswa.id_sekolah', '=', 'tbl_sekolah.id_sekolah')
+                            ->where('tbl_siswa.id_siswa', $id)->first(),
+            'listSekolah' => Sekolah::all()
+        ];
+        if (!$data['dataUser']) {
+            abort(404, 'Data tidak ditemukan !');
+        }
+        return view('adminPages.playPages.siswa-edit', $data);
+    }
+
+    public function doUpdateSiswa($id_user, Request $request){
+        $user = Siswa::find($id_user);
+        $request->validate([
+            'nama' => 'required|min:5',
+            'nama_sekolah' => 'required|numeric',
+            'kelas' => 'required|numeric',
+            'jenis_kelamin' => 'required|min:5',
+        ]);
+
+        $user->nama_siswa = $request->nama;
+        $user->jenis_kelamin = $request->jenis_kelamin;
+        $user->id_sekolah = $request->nama_sekolah;
+        $user->kelas = $request->kelas;
+
+        if ($user->save()) {
+            alert()->success('Hore!','User berhasil di update !');
+            return back();
+        } else {
+            alert()->warning('Waduhh !','User gagal di update !');
+            return back();
+        }
+    }
+
     public function dataKeputusan(Request $request) {
         $title = 'Hapus Data!';
         $text = "Apakah yakin ingin hapus data ini ?";
@@ -222,21 +315,21 @@ class AdminController extends Controller
             'title' => 'Data Keputusan Siswa',
             'segmentUrl' => $request->segments()[1],
 
-            'dataUser' => User::select('*')
-                                        ->join('tbl_sekolah', 'tbl_users.id_sekolah', '=', 'tbl_sekolah.id_sekolah')
-                                        ->join('tbl_hasil_kalkulasi', 'tbl_users.id_user', '=', 'tbl_hasil_kalkulasi.id_user')
-                                        ->where('tbl_users.level', 'siswa')->paginate(100)
+            'dataUser' => Siswa::select('*')
+                                        ->join('tbl_hasil_kalkulasi', 'tbl_siswa.id_siswa', '=', 'tbl_hasil_kalkulasi.id_siswa')
+                                        ->join('tbl_sekolah', 'tbl_siswa.id_sekolah', '=', 'tbl_sekolah.id_sekolah')->get()
         ];
+
         return view('adminPages.playPages.dataKeputusan', $data);
     }
 
     public function hapusKalkulasi($id){
-        $a = DB::table('tbl_hasil_kalkulasi')->where('id_user', $id);
+        $a = HasilKalkulasi::find($id);
         if ($a->delete()) {
-            alert()->success('Hore!','Data berhasil di hapus !');
+            alert()->success('Hore!', 'Data berhasil di hapus !');
             return back();
         } else {
-            alert()->error('Waduhh !','Data gagal di hapus !');
+            alert()->error('Waduhh !', 'Data gagal di hapus !');
             return back();
         }
     }

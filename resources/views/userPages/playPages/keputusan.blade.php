@@ -69,7 +69,6 @@
                 <label class="form-label" for="beasiswa">Beasiswa</label>
                 <select class="form-select @error('beasiswa') is-invalid @enderror" name="beasiswa" id="beasiswa" aria-label="Default select example">
                   <option selected="" value="">Pilih Beasiswa</option>
-                  <option value="0">Tidak Ada</option>
                   <option value="1">Kabupaten</option>
                   <option value="2">Provinsi</option>
                   <option value="3">KIP</option>
@@ -114,7 +113,6 @@
                 <label class="form-label" for="prestasi">Prestasi Yang Pernah Diraih</label>
                 <select class="form-select @error('prestasi') is-invalid @enderror" name="prestasi" id="prestasi" aria-label="Default select example">
                   <option selected="" value="">Pilih Prestasi</option>
-                  <option value="0">Tidak Ada</option>
                   <option value="1">Kabupaten</option>
                   <option value="2">Provinsi</option>
                   <option value="3">Nasional</option>

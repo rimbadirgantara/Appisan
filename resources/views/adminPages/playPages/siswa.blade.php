@@ -25,11 +25,11 @@
       @endif
       <button class="btn btn-sm btn-success mt-3" data-bs-toggle="modal" data-bs-target="#tambah-user"><span
         class="fa fa-graduation-cap"></span> Tambah
-        Guru</button>
+        Siswa</button>
       <table class="table">
         <thead>
           <tr>
-            <th scope="col">Username</th>
+            <th scope="col">Nama</th>
             <th scope="col">Tingkat</th>
             <th scope="col">Sekolah</th>
             <th class="text-end" scope="col">Actions</th>
@@ -38,16 +38,16 @@
         <tbody>
           @foreach ($dataUser as $du)
           <tr>
-            <td>{{$du['username']}}
+            <td>{{$du['nama_siswa']}}
             </td>
             <td>Kelas {{$du['kelas']}}</td>
             <td>{{$du['nama_sekolah']}}</td>
             <td class="text-end">
               <div>
-                <a href="/admin/guru/{{$du['id_user']}}/edit" class="btn btn-sm btn-warning" type="button" title="Edit" data-bs-placement="top"
+                <a href="/admin/siswa/{{$du['id_siswa']}}/edit" class="btn btn-sm btn-warning" type="button" title="Edit" data-bs-placement="top"
                   data-bs-toggle="tooltip" data-bs-target="#edit-user"><span class="fas fa-edit"></span></a>
 
-                <a href="/admin/guru/{{$du['id_user']}}/hapus" class="btn btn-sm btn-danger" type="button"
+                <a href="/admin/siswa/{{$du['id_siswa']}}/hapus" class="btn btn-sm btn-danger" type="button"
                   data-bs-toggle="tooltip" data-bs-placement="top" title="Delete" data-confirm-delete="true"><span
                     class="fas fa-trash-alt"></span></a>
               </div>
@@ -65,39 +65,25 @@
     <div class="modal-content position-relative">
       <div class="modal-body p-0">
         <div class="rounded-top-lg py-3 ps-4 pe-6 bg-light">
-          <h4 class="mb-1" id="modalExampleDemoLabel">Tambah Guru</h4>
+          <h4 class="mb-1" id="modalExampleDemoLabel">Tambah Siswa</h4>
         </div>
         <div class="p-4 pb-0">
-          <form action="/admin/users/tambah" method="post">
+          <form action="/admin/siswa/tambah" method="post">
             @csrf
             <div class="row align-items-center">
               <div class="row">
                 <div class="col-lg-6">
                   <div class="mb-3">
-                    <label class="form-label" for="username">Username</label>
-                    <input class="form-control @error('username') is-invalid @enderror" name="username" id="username"
-                      type="text" required value="{{old('username')}}" />
+                    <label class="form-label" for="nama">Nama Siswa</label>
+                    <input class="form-control @error('nama') is-invalid @enderror" name="nama" id="nama"
+                      type="text" required value="{{old('nama')}}" />
                   </div>
                   <span class="text-danger">
-                    @error('username')
+                    @error('nama')
                     {{ $message }}
                     @enderror
                   </span>
                 </div>
-                <div class="col-lg-6">
-                  <div class="mb-3">
-                    <label class="form-label" for="email">Alamat Email</label>
-                    <input class="form-control @error('email') is-invalid @enderror" name="email" id="email" type="text"
-                      required value="{{old('email')}}" />
-                  </div>
-                  <span class="text-danger">
-                    @error('email')
-                    {{ $message }}
-                    @enderror
-                  </span>
-                </div>
-              </div>
-              <div class="row">
                 <div class="col-lg-6">
                   <label class="form-label" for="nama_sekolah">Nama Sekolah</label>
                   <select name="nama_sekolah" class="form-select @error('nama_sekolah') is-invalid @enderror">
@@ -112,6 +98,8 @@
                   </div>
                   @enderror
                 </div>
+              </div>
+              <div class="row">
                 <div class="col-lg-6">
                   <div class="mb-3">
                     <label class="form-label" for="kelas">Kelas</label>
@@ -124,9 +112,7 @@
                     @enderror
                   </span>
                 </div>
-              </div>
-              <div class="row">
-                <div class="col-lg-4">
+                <div class="col-lg-6">
                   <div class="mb-3">
                     <label for="jenisKelamin">Jeni Kelamin</label>
                     <select class="form-select" name="jenis_kelamin" id="jenisKelamin"
@@ -137,31 +123,6 @@
                     </select>
                     <span class="text-danger">
                       @error('jenis_kelamin')
-                      {{ $message }}
-                      @enderror
-                    </span>
-                  </div>
-                </div>
-                <div class="col-lg-4">
-                  <div class="mb-3">
-                    <label for="level">Level</label>
-                    <select class="form-select" name="level" id="level" aria-label="Default select example">
-                      <option selected="" value="guru">Guru</option>
-                    </select>
-                    <span class="text-danger">
-                      @error('level')
-                      {{ $message }}
-                      @enderror
-                    </span>
-                  </div>
-                </div>
-                <div class="col-lg-4">
-                  <div class="mb-3">
-                    <label class="form-label" for="password">Password</label>
-                    <input class="form-control @error('username') is-invalid @enderror" name="password" id="password"
-                      type="password" required />
-                    <span class="text-danger">
-                      @error('password')
                       {{ $message }}
                       @enderror
                     </span>
