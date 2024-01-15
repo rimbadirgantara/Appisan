@@ -1,5 +1,7 @@
 @extends('adminPages.adminLayouts')
 @section('content')
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
 <div class="d-flex mb-4 mt-3"><span class="fa-stack me-2 ms-n1"><i class="fas fa-circle fa-stack-2x text-300"></i>
   <i class="fa-inverse fa-stack-1x text-primary fas fa-percentage"></i></span>
   <div class="col">
@@ -47,19 +49,137 @@
   </div>
 </div>
 <div class="row mt-3">
-  <div class="col-lg">
+
+  {{-- siwa --}}
+  <div class="col-lg-6">
     <div class="card mb-3">
       <div class="card-header bg-light py-2">
         <div class="row flex-between-center">
           <div class="col-auto">
-            <h6 class="mb-0">Siswa / Sekolah</h6>
+            <h6 class="mb-0">Calon Mahasiswa</h6>
           </div>
         </div>
       </div>
       <div class="card-body h-100">
-        <div class="echart-bar-top-products h-100" data-echart-responsive="true"></div>
+        <canvas id="barChart"></canvas>
+      </div>
+    </div>
+  </div>
+
+  {{-- guru --}}
+  <div class="col-lg-6">
+    <div class="card mb-3">
+      <div class="card-header bg-light py-2">
+        <div class="row flex-between-center">
+          <div class="col-auto">
+            <h6 class="mb-0">Guru</h6>
+          </div>
+        </div>
+      </div>
+      <div class="card-body h-100">
+        <canvas id="guruBarChart"></canvas>
       </div>
     </div>
   </div>
 </div>
+
+<div class="row mt-3">
+  {{-- siswa --}}
+  <div class="col-lg-6">
+    <div class="card mb-3">
+      <div class="card-header bg-light py-2">
+        <div class="row flex-between-center">
+          <div class="col-auto">
+            <h6 class="mb-0">Siswa per sekolah</h6>
+          </div>
+        </div>
+      </div>
+      <div class="card-body h-100">
+        <canvas id="polarChart"></canvas>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  var barChart = document.getElementById('barChart').getContext('2d');
+  var myChart = new Chart(barChart, {
+      type: 'bar',
+      data: {
+          labels: @json($labelBar),
+          datasets: [{
+              label: 'Calon Siswa',
+              data: @json($dataBarChart),
+              backgroundColor: 'rgba(75, 192, 192, 0.2)',
+              borderColor: 'rgba(75, 192, 192, 1)',
+              borderWidth: 1
+          }]
+      },
+      options: {
+          scales: {
+              y: {
+                  beginAtZero: true
+              }
+          }
+      }
+  });
+</script>
+
+<script>
+  var guruBarChart = document.getElementById('guruBarChart').getContext('2d');
+  var myChart = new Chart(guruBarChart, {
+      type: 'bar',
+      data: {
+          labels: @json($labelGuru),
+          datasets: [{
+              label: 'Guru',
+              data: @json($dataGuru),
+              backgroundColor: 'rgba(255, 206, 86, 0.2)',
+              borderColor: 'rgba(255, 206, 86, 1)',
+              borderWidth: 1
+          }]
+      },
+      options: {
+          scales: {
+              y: {
+                  beginAtZero: true
+              }
+          }
+      }
+  });
+</script>
+
+<script>
+  var polarChart = document.getElementById('polarChart').getContext('2d');
+  var myChart = new Chart(polarChart, {
+      type: 'polarArea',
+      data: {
+          labels: @json($labelPie),
+          datasets: [{
+              data: @json($dataPieChart),
+              backgroundColor: [
+                  'rgba(255, 99, 132, 0.7)',
+                  'rgba(54, 162, 235, 0.7)',
+                  'rgba(99, 255, 128, 0.7)',
+                  'rgba(255, 99, 226, 0.7)',
+                  'rgba(255, 159, 99, 0.7)',
+                  'rgba(255, 206, 86, 0.7)',
+                  'rgba(75, 192, 192, 0.7)',
+                  'rgba(153, 102, 255, 0.7)',
+              ],
+              borderColor: [
+                'rgba(255, 99, 132, 0.7)',
+                  'rgba(54, 162, 235, 0.7)',
+                  'rgba(99, 255, 128, 0.7)',
+                  'rgba(255, 99, 226, 0.7)',
+                  'rgba(255, 159, 99, 0.7)',
+                  'rgba(255, 206, 86, 0.7)',
+                  'rgba(75, 192, 192, 0.7)',
+                  'rgba(153, 102, 255, 0.7)',
+              ],
+              borderWidth: 1
+          }]
+      },
+  });
+</script>
 @endsection

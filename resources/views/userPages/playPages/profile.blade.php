@@ -1,4 +1,4 @@
-@extends('adminPages.adminLayouts')
+@extends('userPages.adminLayouts')
 @section('content')
 <div class="card mb-3">
   <div class="card-header position-relative min-vh-25 mb-7">
@@ -24,7 +24,7 @@
     <h5 class="mb-0" data-anchor="data-anchor">Profile</h5>
   </div>
   <div class="card-body bg-light">
-    <form action="/siswa/profile/{{Auth::user()->id_user}}/update" enctype="multipart/form-data" method="POST">
+    <form action="/guru/profile/{{Auth::user()->id_user}}/update" enctype="multipart/form-data" method="POST">
       @csrf
       <div class="row">
         <div class="row">

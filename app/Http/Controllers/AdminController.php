@@ -17,21 +17,72 @@ use DB;
 class AdminController extends Controller
 {
     public function index(Request $request) {
+
+        // bar chart
+        $labelbarChart = [];
+        $dataBarChart = [];
+        $a = DB::table('tbl_hasil_kalkulasi')
+        ->selectRaw('nama_jurusan, COUNT(*) as jumlah')
+        ->groupBy('nama_jurusan')->get();
+        foreach ($a as $a) {
+            $labelbarChart[] = $a->nama_jurusan;
+            $dataBarChart[] = $a->jumlah;
+        }
+
+        // pie chart
+        $labelPieChart = [];
+        $dataPieChart = [];
+        $b = DB::table('tbl_siswa')
+        ->join('tbl_sekolah', 'tbl_siswa.id_sekolah', '=', 'tbl_sekolah.id_sekolah')
+        ->selectRaw('nama_sekolah, COUNT(tbl_sekolah.nama_sekolah) as jumlah')
+        ->groupBy('tbl_sekolah.nama_sekolah')->get();
+        
+        foreach($b as $b) {
+            $labelPieChart[] = $b->nama_sekolah;
+            $dataPieChart[] = $b->jumlah;
+        }
+
+        // guru chart
+        $labelGuru = [];
+        $dataGuru = [];
+        $d = DB::table('tbl_users')
+        ->join('tbl_sekolah', 'tbl_users.id_sekolah', '=', 'tbl_sekolah.id_sekolah')
+        ->selectRaw('nama_sekolah, COUNT(tbl_sekolah.nama_sekolah) as jumlah')
+        ->groupBy('tbl_sekolah.nama_sekolah')->get();
+        foreach($d as $d) {
+            $labelGuru[] = $d->nama_sekolah;
+            $dataGuru[] = $d->jumlah;
+        }
+
         $data = [
-            'appName' => 'PinPilJur',
+            'appName' => 'Appisan',
             'title' => 'Dashboard Admin',
             'segmentUrl' => $request->segments()[1],
 
-            'totalSiswa' => User::where('level', 'siswa')->count(),
-            'siswaLaki' => User::where('jenis_kelamin', 'Laki-laki')->where('level', 'siswa')->count(),
-            'siswaPerempuan' => User::where('jenis_kelamin', 'Perempuan')->where('level', 'siswa')->count()
-        ];
+            'totalSiswa' => Siswa::all()->count(),
+            'siswaLaki' => Siswa::where('jenis_kelamin', 'Laki-laki')->count(),
+            'siswaPerempuan' => Siswa::where('jenis_kelamin', 'Perempuan')->count(),
+
+            // bar chart
+            'labelBar' => $labelbarChart,
+            'dataBarChart' => $dataBarChart,
+
+            // pie chart
+            'labelPie' => $labelPieChart,
+            'dataPieChart' => $dataPieChart,
+
+            // guru
+            'labelGuru' => $labelGuru,
+            'dataGuru' => $dataGuru
+        ]; 
+
+        // dd($data['$dataPieChart']);
         return view('adminPages.playPages.index', $data);
     }
     
     public function profile(Request $request) {
         $data = [
-            'appName' => 'PinPilJur',
+            'appName' => 'Appisan',
             'title' => 'Admin Profile',
             'segmentUrl' => $request->segments()[1],
 
@@ -65,7 +116,7 @@ class AdminController extends Controller
             $password = Hash::make($request->password);
             $pwRules = 'required|min:8';
         } else {
-            $password = Hash::make($request->password);
+            $password = $user->password;
             $pwRules = '';
         }
         $request->validate([
@@ -103,7 +154,7 @@ class AdminController extends Controller
         $text = "Apakah yakin ingin hapus data ini ?";
         confirmDelete($title, $text);
         $data = [
-            'appName' => 'PinPilJur',
+            'appName' => 'Appisan',
             'title' => 'Guru',
             'segmentUrl' => $request->segments()[1],
 
@@ -158,7 +209,7 @@ class AdminController extends Controller
 
     public function editUser($id_user, Request $request){
         $data = [
-            'appName' => 'PinPilJur',
+            'appName' => 'Appisan',
             'title' => 'Edit Guru',
             'segmentUrl' => $request->segments()[1],
             'dataUser' => User::select('tbl_users.*', 'tbl_sekolah.*')
@@ -221,7 +272,7 @@ class AdminController extends Controller
         $text = "Apakah yakin ingin hapus data ini ?";
         confirmDelete($title, $text);
         $data = [
-            'appName' => 'PinPilJur',
+            'appName' => 'Appisan',
             'title' => 'Siswa',
             'segmentUrl' => $request->segments()[1],
 
@@ -269,7 +320,7 @@ class AdminController extends Controller
 
     public function editSiswa($id, Request $request){
         $data = [
-            'appName' => 'PinPilJur',
+            'appName' => 'Appisan',
             'title' => 'Edit Siswa',
             'segmentUrl' => $request->segments()[1],
             'dataUser' => Siswa::select('tbl_siswa.*', 'tbl_sekolah.*')
@@ -303,7 +354,7 @@ class AdminController extends Controller
         } else {
             alert()->warning('Waduhh !','User gagal di update !');
             return back();
-        }
+        } 
     }
 
     public function dataKeputusan(Request $request) {
@@ -311,7 +362,7 @@ class AdminController extends Controller
         $text = "Apakah yakin ingin hapus data ini ?";
         confirmDelete($title, $text);
         $data = [
-            'appName' => 'PinPilJur',
+            'appName' => 'Appisan',
             'title' => 'Data Keputusan Siswa',
             'segmentUrl' => $request->segments()[1],
 

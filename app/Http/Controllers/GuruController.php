@@ -21,7 +21,7 @@ class GuruController extends Controller
         $text = "Apakah yakin ingin hapus data ini ?";
         confirmDelete($title, $text);
         $data = [
-            'appName' => 'PinPilJur',
+            'appName' => 'Appisan',
             'title' => 'Dashboard Guru',
             'segmentUrl' => $request->segments()[1],
 
@@ -52,7 +52,7 @@ class GuruController extends Controller
     public function profile(Request $request)
     {
         $data = [
-            'appName' => 'PinPilJur',
+            'appName' => 'Appisan',
             'title' => 'User Profile',
             'segmentUrl' => $request->segments()[1],
 
@@ -89,7 +89,7 @@ class GuruController extends Controller
             $password = Hash::make($request->password);
             $pwRules = 'required|min:8';
         } else {
-            $password = Hash::make($request->password);
+            $password = $user->password;
             $pwRules = '';
         }
         $request->validate([
@@ -132,7 +132,7 @@ class GuruController extends Controller
         $text = "Apakah yakin ingin hapus data ini ?";
         confirmDelete($title, $text);
         $data = [
-            'appName' => 'PinPilJur',
+            'appName' => 'Appisan',
             'title' => 'Keputusan',
             'segmentUrl' => $request->segments()[1],
 
@@ -310,7 +310,9 @@ class GuruController extends Controller
         }
 
         $dataSiswa = Prekalkulasi::select("tbl_siswa.id_siswa")
-            ->join('tbl_siswa', 'tbl_prekalkulasi.id_siswa', '=', 'tbl_siswa.id_siswa')->get();
+            ->join('tbl_siswa', 'tbl_prekalkulasi.id_siswa', '=', 'tbl_siswa.id_siswa')
+            ->where('tbl_prekalkulasi.id_user', Auth::user()->id_user)->get();
+            
         foreach ($dataSiswa as $key => $value) {
             $hasilKalkulasi = new HasilKalkulasi;
             $hasilKalkulasi->id_user = Auth::user()->id_user;
@@ -363,7 +365,7 @@ class GuruController extends Controller
         $text = "Apakah yakin ingin hapus data ini ?";
         confirmDelete($title, $text);
         $data = [
-            'appName' => 'PinPilJur',
+            'appName' => 'Appisan',
             'title' => 'Hasil Keputusan',
             'segmentUrl' => $request->segments()[1],
             'dataHasil' => HasilKalkulasi::select('*')

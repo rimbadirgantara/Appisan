@@ -46,22 +46,6 @@
     </div>
   </div>
 </div>
-<div class="row mt-3">
-  <div class="col-lg">
-    <div class="card mb-3">
-      <div class="card-header bg-light py-2">
-        <div class="row flex-between-center">
-          <div class="col-auto">
-            <h6 class="mb-0">Siswa / Sekolah</h6>
-          </div>
-        </div>
-      </div>
-      <div class="card-body h-100">
-        <div class="echart-bar-top-products h-100" data-echart-responsive="true"></div>
-      </div>
-    </div>
-  </div>
-</div>
 
 {{-- form tambah siswa --}}
 <div class="row mt-3">

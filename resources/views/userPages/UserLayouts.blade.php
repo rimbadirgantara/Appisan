@@ -133,10 +133,10 @@
             data-bs-toggle="collapse" data-bs-target="#navbarVerticalCollapse" aria-controls="navbarVerticalCollapse"
             aria-expanded="false" aria-label="Toggle Navigation"><span class="navbar-toggle-icon"><span
                 class="toggle-line"></span></span></button>
-          <a class="navbar-brand me-1 me-sm-3" href="{{ asset('adminTemplate') }}/index.html">
+          <a class="navbar-brand me-1 me-sm-3" href="{{route('guru.index')}}">
             <div class="d-flex align-items-center"><img class="me-2"
                 src="{{ asset('adminTemplate') }}/assets/img/icons/spot-illustrations/falcon.png" alt="" width="40" /><span
-                class="font-sans-serif">PinPilJur</span>
+                class="font-sans-serif">{{$appName}}</span>
             </div>
           </a>
           <ul class="navbar-nav navbar-nav-icons ms-auto flex-row align-items-center">

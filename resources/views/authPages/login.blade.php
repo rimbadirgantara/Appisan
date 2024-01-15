@@ -38,7 +38,6 @@
                       @if (Session::get('failed'))
                           <div class="alert alert-danger alert-dismissible fade show" role="alert">
                             {{ Session::get('failed') }}
-                            <button type="button" class="btn-close" data-bs-dismiss="alert" arialabel="Close"></button>
                           </div>
                         @endif
                     </div>
